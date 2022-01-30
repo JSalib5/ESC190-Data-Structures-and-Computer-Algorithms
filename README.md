@@ -3,14 +3,25 @@ An advanced algorithms course focused on C and advanced use of Python completed 
 
 # Concepts and Algorithms Learnt and Applied
 Have completed Labs and Porjects focused on:
-  Pointers, Double Pointers
-  Linked Lists
-  Stacks
-  Queues, Priority Queues
-  Heaps, Heapsort and Heapify
-  Graphs, Directed Graphs and Weighted Graphs
-  Binary Trees, Breadth First and Depth First Search
-  Dijkstra's Algorithm
-  A* Algorithm 
-  Gradient Descent
-  Neural Networks
+  
+  - Pointers, Double Pointers
+  
+  - Linked Lists
+  
+  - Stacks
+  
+  - Queues, Priority Queues
+  
+  - Heaps, Heapsort and Heapify
+  
+  - Graphs, Directed Graphs and Weighted Graphs
+  
+  - Binary Trees, Breadth First and Depth First Search
+  
+  - Dijkstra's Algorithm
+  
+  - A* Algorithm 
+  
+  - Gradient Descent
+  
+  - Neural Networks
