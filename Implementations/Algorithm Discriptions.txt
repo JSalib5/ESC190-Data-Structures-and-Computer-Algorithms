@@ -1,0 +1,603 @@
+In general there are different types of data strcutures that we can utilize and play around with in order
+to achieve the task as effeciently as possible.
+
+In this course we call the abstaract data types (ADT), where they are the general umbrella that can be then split
+into subsections, those subsections can be further split into specific implemenations
+
+For example, lists are a subsection of ADTs that can be futher divided into more specific lists such arrays or linked 
+lists
+
+*(Singly) Linked Lists:
+
+A singly linked list is basically a group of nodes that are in an organized fashion, each node stores a data type and 
+a pointer to the memory address of the data stored in the next node (the node proceeding the current ndoe), the pointer
+of the last node points to NULL
+
+1. Insertion:
+
+The concept is to insert a node in a specific position in the linked list, the concept is fairly simple, lets for 
+example say we want to insert a new node at index 2, we change the address the pointer of the node at index 1 is 
+assigned to the address of this new node, and then set the pointer of the new node placed in  index 2 to the memory
+address of the data in the old node that was at index 2
+
+Runtime Complexity: O(1) --> the conecpt as explained above is just changing the memory address of the pointer
+in the index prior to the poisition you are inserting and assigning its old value to the pointer of this new node, hence
+the runtime complxity of O(1)
+
+2. Remove:
+
+Remove is the complete opposite of insertion, it is removing the node at a given index, as you know the way we can
+move from one node to the next is by assigning the current node the memory address of the data of the next node, to
+remove a node form this linked interconnection we simply change the pointer of the node at the index previous to the 
+node we want to remove to the memory address of the pointer of the node we are remvoving, this is confusing so here
+is an example to explain:
+
+node0->data = 5
+node0->next = node1
+node1->data = 10
+node1->next = node2
+node2->data = 17
+node2->next = NULL
+
+Let's say we want to remove node 1 from this linked list:
+
+We reach node 1 by pointing to the memory address its stored at, in removing we are simple changing:
+
+node0->next = node1 to node0->next = node2
+
+Doing that we can imagine it as skipping over node1 as the previous node (node0) that used to link it to the list
+is no longer pointing to its memory address but to the memory address of the node after
+
+Runtime Complexity: O(1) --> similarly to insertion we are only changing the memory address of the index before
+the node we want to remove to, hence the code only has to run once
+
+3. Get:
+
+The concept is to get the value at a certain node, simple as that
+
+Runtime Complexity: O(n) where n = index of node we want the value for --> To get the value of the node at a certain
+index we have to itirate from the very start of the linked list until we reach the node at the index we are looking
+for, hence we have to run "n" times through our linked list
+
+*Arrays:
+
+1. Insertion: 
+Its runtime complexity is O(n) as you have to copy the entire array from index i+1 to the end to be able
+to insert a new value into the array at a given index i, and sometimes you may have to copy the entire array into 
+a new block of memory to be able to store the entire array with the inserted value
+
+2. Remove:
+The concept is to copy array[i+1] into array[i] where "i" is the index of the node you want to remove, and itirate
+that for every element until the end of the array, its runtime complexity is O(n) as you have to go through every
+element after the given index and copy it to the index before it until they very end
+
+3. Get:
+To get the value at a certain index lets say 2, you only have to call the array at that index: array[2] and the value
+that would return is the desried value, hence the runtime complexity is O(1).
+
+*Stack:
+
+A stack if known as a "FILA" data type: Last in, First out:
+    - It allows removal of elements and addition of elements at the top of the stack
+
+A strack is a list with the following operations:
+
+    -Push: Append an element to the end of the list
+    -Pop: Remove an element from the end of a list and get its value
+
+Taking those concepts into linked lists and arrays:
+
+    1. Linked Lists:
+
+    --> Push: O(1) as the concept is similar to insertion, the only difference is that it is at the very end of the
+    linked list instead of a given index
+
+    --> Pop: O(1) as the concept is similar to remove, we set the pointer of the second to last pointer to NULL, the
+    only difference we need to consider in this case is storing the value of the data being stored at the last index
+
+    2. Arrays:
+
+    --> Push: O(n) as similar to the explanation above due to the nature of arrays we might have to copy the entire 
+    array into a new block of memory insert the value at the very top of the stack
+
+    --> Pop: O(1) as we are removing the element from the very top of the stack and we are not reallocating the data
+    into new positions in memory, we are simply removing a sigular data point from the array without doing any other
+    changes
+
+*Queue:
+
+A queue is known as a "FIFO" data type: First in, first out
+
+A queue is a list with the following operations: 
+
+    -Enqueue: append an element to the end of the list
+    -Dequeue: remove the element from the start of the list and get its value
+
+Taking those concepts into linked lists and arrays:
+
+    1. Linked Lists:
+
+    --> Dequeue: O(1) as we are simply changing the memory of the pointer of the last value and assiging the memory
+    address of the new node we want to insert
+
+    --> Enqueue: O(1) as the first memory adress that the linked list points at is the first node in the entire 
+    linked list, hence removing it is simply changing the intial pointer to the memory address of the ndoe after
+    it and keeping tabs of the value (data) that was being stored in the first node of the linked list
+
+    2. Arrays:
+
+    --> Dequeue: O(1) as similar to the concept of pop that we have discussed above, we do not need to do any 
+    reallocation of memory, we are simply clearing up the position in memory that was taken up by the last value of
+    the array, hence we are removing a singular point at the very end of the array
+    
+    --> Enqueue: O(1) assuming we never need to resize, however it can be O(n) as discussed above if we have to 
+    reallocate the entire block of memory to somewhere else, meaning we will be having to copy element by element
+    into a new position in memory that has enough spcace to fit the entire array with the addition of the new value
+
+*Priority Queue ADT:
+
+A queue where the first element that is dequeued (removed) is one with the higest Priority
+
+A priority queue is a list with the following operations:
+
+    - Insert(S, x): add an element with priority "x" to the priority queue "S"
+    - min(S): return the element with the smallest value from the priority queue
+    - extract_min(S): remove and return the element with the smallest value from the priority queue
+
+Taking those concepts into linked lists and arrays:
+
+    1. Arrays/ Linked Lists:
+
+    --> Insert: O(1) as you are simply inserting an element into either ADT, for arrays though we need to consider
+    that no resizing is required and the new element with set priority can be fitted into the memory without
+    interfering with any other functionlities, as for linked lists its always O(1)
+
+    --> min(S): O(n) as in both cases we have to check every element and keep tabs of the min value (keep comparing
+    all the values inside either ADT until we itirate through the entire data and return the min value of what we
+    have found)
+
+    --> extract_mis(S): O(n) as we have to similarly run through the entire linked list or array before we are able 
+    to remove it and return its value
+
+    2. Sorted Arrays/ Sorted Linked Lists:
+
+    --> Insert: O(n) as priority queues isnt just a storage of the data fed into it in a random manner, it organizes
+    them in terms of their priority, for linked lists in the worst case we have to run through the entire list before
+    we are able to add the new element, and for arrays we at time might have to insert this new element in the middle
+    meaning all the proceeding data has to be copied and moved over, and at times we might need to reallocate the entire
+    data into a new memory block
+
+    --> min(S): O(1) because the linked list and array are sorted, we simply return the first value which is O(1) in arrays
+    no matter the position but also O(1) for linked lists in this case since the initial pointer will be the to the 
+    smallest value in the linked list, as again it is sorted
+
+    --> extract_min(S): O(1) as in both cases we have easy access to the first element, in linked lists we change the initial
+    pointer to the second node and that removes the smallest value from the linked list, and for array we only have to clear
+    the memory that is being taken up by the first element without haveing to do any change to the proceeding data and or
+    having to reallocate any memory
+
+An implemenation of a priority queue: 
+
+*Heaps: A tree with every node having two children, except the nodes at the very end which we call the leaves of the data
+structure, and every leaf is as far left as possible on the last level (it has to be filled from left to right at every level)
+
+    - We will be storing heaps as arrays that store the data from top to bottom and left to right simeltaneously
+    - If given an index "i":
+
+    --> Parent = i/2
+    --> To the left of the data point: 2 * i
+    --> To the right of the data point: (2 * i) + 1 
+
+    - In a binary heap, each node "n", the value stored in the parents must be less than or equal to the value stored at "n"
+    *Note: The root (top node of the heap) is always the minumum element
+
+- Heap operations:
+
+    1. Insert: We insert the value at the leftmost empty space at the very bottom level of the heap:
+
+        a) The heap in this case remains a full tree
+
+        b) Due to the method of insertion this might break the heap order property (meaning the inserted value might be less
+        than its parent), to fix this issue we have to prelocte the value up (change the value and its parent) until its at
+        its appropriate position
+    
+    
+    2. Extract Min: Save the minumum value (the root) and replace it with the the element at the very end of th heap (the one
+    at the lowest position and the most to the right), now we have to prelocate the value at the root 1 index down at a time
+    until its appropriate position is found (note when choosing between the lest and right branch, it always changes positions
+    with the branch of the lower value)
+
+    - Runtime Complexity:
+
+    Before breaking down the runtime complexity of both operations, we need to note that the height of a heap is the longest
+    distance from the root to a leaf, a since at most we do "h" swaps, the runtime complexity for both if O(h) which is 
+    equivalent to O(log(n)) as we are triversing level by level instead of element by element in both of these operations
+
+*Heapify and Heapsort:
+
+    - Building a binary heap:
+
+    To build a heap from a list of elements we do the following:
+
+    Step 1: Copy the elements into an array in any order
+    Step 2: Prelocate each element down the heap, starting from the the second last level, moving right to left when moving
+    among levels
+
+    - Example with simple explaination:
+
+                                                            70
+                                            20                          18
+                                    14              22          68              91
+                                100     15      190     19   77     94      100     102 
+
+    -Step 1: Look at the second to last row and the index at the righmost of the tree its (91) its children are both greater in value
+    hence we go to the value to its left on the same level its (68) which agains both of its children are greater in value, now we 
+    go the element to its left again which is (22) when looking at its children 19 is smaller than 22 hence we switch their positions,
+    and the tree becomes as follows:
+
+                                                            70
+                                            20                          18
+                                    14              19          68              91
+                                100     15      190     22   77     94      100     102 
+    
+    *Note: 19 is still smaller than 20 (its parent), however as mentioned above, we only check the index and its children, and in this
+    case (19)'s children are both values greater than it, hence we move on to the value to its right even though if we look to its
+    parent is has a greater value than it (19 in the second tree), further it needs to be noted if a parent is of value greater than both 
+    of its branches, then we switch its position with the branch holding the smaller value
+
+    - Runtime Complexity: we to perform n/2 calls in order to prelocate down, and once we reach the root, the tree will have been completely
+    heapified, and we know from before that it takes O(log(n)) as a worst runtime complexity to prelocate down, but due to the fact that we
+    have to run through at most n/2 calls we have the following upper bound: O((n/2)log(n)), however when exploring the worst case scenario
+    the runtime complexity is O(n) (the algebra can be found on the slides the professor has provided)
+
+    -Heapsort:
+
+    1. Create a heap from a list using heapify: O(n)
+    2. Call extract_min "n" times, placing back the elements in the original list in order: O(log(n))
+
+    Hence, total runtime: O(n + log(n)) = O(nlog(n))
+
+
+*Graphs: 
+
+A graph G(V, E) consists of a set of verticies (nodes) V and a set of edges E, where;
+
+V = {v1, v2, v3, v4, v5}
+E = {e1, e2, e3, e4}
+e1 = {v1, v2}
+e2 = {v2, v3}
+e3 = {v2, v5}
+e4 = {v3, v4}
+
+In concept verticies are objects we have stored in memory and edges connect objects that refer to one another
+
+    - Directed Graphs:
+
+        Edges have directions associated with them, or in other words it tell you which object is pointing to the other
+        (for example the object 2 is pointing at object 1, so the direction of that edge is from object 2 to object 1)
+    
+        In the previous notation we wrote e1 = {v1, v2} but when it comes to directed graphs, the node in the first position is where
+        the edge is leaving from and the node in the second position of where the node is poitning at, so in the exmaple above with the
+        objects if e1 was the edge between object 2 and object, we know object 2 is pointing at object one hence its written as:
+        e1 = {object 2, object 1}, this is the same for the remaining set of edges that are pointing from one object to another
+
+        *Note: there may be 2 directed edges going back and forth between 2 objects (object 1 pointing at object 2 and vise versa) each of
+        those are unique edges with different notaion, because as pointed above the formality of writing the edge depends on where we are 
+        starting from and where we stopping
+
+    - Weighted Graphs (these are the ones we most commonly use later on):
+
+        This is a graph where there is a weight associated with each edge connecting the nodes instead of a direction, in this case there 
+        is no relative uniqueness as to which direction you are moving from as we are only concerned with the weight of the movement from one
+        node to the next
+
+Terminology used for graphs:
+
+    1. Vertex V1 is "adjacent" to vertex V2 if there is an edge connecting them
+    2. A "path" is a sequence of verticies in which each vertex is "adjacent" to the next one (the length of a path is the number of edges in it)
+    3. A cycle is a path is in concept being able to go from one vertex visiting the vertex adjacent to it, and the final one if adjacent to the 
+    initial vertex we left from (we can compare this to an infinite loop that if we take this path we will be walking in circles visiting the same
+    nodes in the same sequence every time)
+    4. A graph with no cycles is considered an "acyclic" graph
+    5. A "DAG" is a directed "acyclic" graph
+    6. A "simple path" is a path with no repition of verticies
+    7. A "simple cycle" is a cycle with no repition of verticies
+    8. Two verticies are "connected" if there is a path between them (meaning if v1 has an edge with v2 which has an edge with v3, v1 and v3 are
+    connected)
+    9. The "degree" of a vertix is the number of edges associated with that vertix
+
+Adjacency Matrix:
+
+    - An nxn matrix where A[i][j] = 1 if there is verticy between the nodes, and 0 otherwise
+
+    Example 1   : Adjacency Matrix for Directed Graphs
+
+        v1       v2       v3       v4       v5      v6       v7     
+    |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+v1  ||  0  ||||  1  ||||  0  ||||  0  ||||  1  ||||  1  ||||  1  ||
+    |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+    |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+v2  ||  0  ||||  0  ||||  0  ||||  0  ||||  0  ||||  1  ||||  1  ||
+    |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+    |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+v3  ||  1  ||||  0  ||||  0  ||||  0  ||||  1  ||||  0  ||||  1  ||
+    |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+    |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+v4  ||  0  ||||  0  ||||  0  ||||  0  ||||  1  ||||  0  ||||  1  ||
+    |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+    |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+v5  ||  0  ||||  0  ||||  1  ||||  0  ||||  0  ||||  0  ||||  0  ||
+    |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+    |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+v6  ||  0  ||||  0  ||||  0  ||||  1  ||||  0  ||||  0  ||||  0  ||
+    |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+    |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+v7  ||  0  ||||  0  ||||  1  ||||  0  ||||  0  ||||  0  ||||  0  ||
+    |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+    When looking at the graph (considering a directed graph), we an represent it as shown above, before reading the meaning
+    of the data points its important to understand that the nodes in the column (v1...v7) are the ending positions and the 
+    nodes in the row (v1...v7) are the starting positions (where the directed path is pointing from), if we look above we can see 
+    for example that for example v1 is pointing at v2 hence row 1 column 2 is 1, however v2 is not pointing at v2, hence row 1 
+    column 1 is 0, the same breakdown of the table above can be done to visualize a graph of which nodes or pointing at which, their
+    paths, cycles, etc.
+
+    Example 2: Adjacency Matrix for Weighted Graphs
+
+        v1       v2       v3       v4       v5       
+    |||||||||||||||||||||||||||||||||||||||||||||
+v1  || inf ||||  3  |||| inf |||| inf ||||  7  ||
+    |||||||||||||||||||||||||||||||||||||||||||||
+    |||||||||||||||||||||||||||||||||||||||||||||
+v2  ||  3  |||| inf |||| 7  |||| inf ||||  inf ||
+    |||||||||||||||||||||||||||||||||||||||||||||
+    |||||||||||||||||||||||||||||||||||||||||||||
+v3  || inf ||||  7  |||| inf |||| inf |||| inf ||
+    |||||||||||||||||||||||||||||||||||||||||||||
+    |||||||||||||||||||||||||||||||||||||||||||||
+v4  || inf |||| inf |||| inf |||| inf ||||  8  ||
+    |||||||||||||||||||||||||||||||||||||||||||||
+    |||||||||||||||||||||||||||||||||||||||||||||
+v5  ||  7  |||| inf |||| inf ||||  8  |||| inf ||
+    |||||||||||||||||||||||||||||||||||||||||||||
+
+    For weighted graphs, if there is a connection between 2 verticies the adjacency matrix stores the weight of moving from one
+    vertex to another (for both instances), otherwise we put an infinity in the weighted graph as theoretically there is no direct conncetion, 
+    hence to move from one verticy to another directly with no conncection between them you have to move an infinite distance
+
+
+Adjacency List:
+
+    - To get an understanding of both types of adjacency lists, an example of each (weighted and directed) will be explored and explained
+    individually
+
+    1. Directed Graph: 
+       
+    |||||||||     ||||||||||||||||||     ||||||||||||||||||
+  0 ||  .  || --> ||  2  ||||  .  || --> ||  4  ||||  .  ||
+    |||||||||     ||||||||||||||||||     ||||||||||||||||||
+
+    |||||||||     ||||||||||||||||||    
+  2 ||  .  || --> ||  9  ||||  .  || 
+    |||||||||     ||||||||||||||||||     
+  
+    |||||||||     ||||||||||||||||||     ||||||||||||||||||
+  5 ||  .  || --> ||  0  ||||  .  || --> ||  3  ||||  .  ||
+    |||||||||     ||||||||||||||||||     ||||||||||||||||||
+  
+
+    |||||||||     ||||||||||||||||||     ||||||||||||||||||
+  8 ||  .  || --> ||  1  ||||  .  || --> ||  4  ||||  .  ||
+    |||||||||     ||||||||||||||||||     ||||||||||||||||||
+  
+
+    |||||||||     ||||||||||||||||||    
+  9 ||  .  || --> ||  6  ||||  .  || 
+    |||||||||     ||||||||||||||||||     
+
+    Deciphering the data above lets go row by row:
+
+    Row 1: the verticy "0" is pointing towards veritcy "2" and "4", what i need to bring your attention to that whe represnting
+    an directed graph for an adjacency list, we need to write all the verticies its pointing to in ascending order
+
+    Row 2: The veritcy "2" is pointing at verticy "9"
+
+    etc.
+
+    2. Weighted Graph: 
+       
+    |||||||||     |||||||||||||||||||||||||||     |||||||||||||||||||||||||||
+  0 ||  .  || --> ||  2  ||||  8  ||||  .  || --> ||  8  ||||  15 ||||  .  ||
+    |||||||||     |||||||||||||||||||||||||||     |||||||||||||||||||||||||||
+
+    |||||||||     |||||||||||||||||||||||||||     |||||||||||||||||||||||||||
+  2 ||  .  || --> ||  0  ||||  8  ||||  .  || --> ||  3  ||||  1  ||||  .  ||
+    |||||||||     |||||||||||||||||||||||||||     ||||||||||||||||||||||||||| 
+  
+    |||||||||     |||||||||||||||||||||||||||     |||||||||||||||||||||||||||
+  8 ||  .  || --> ||  0  ||||  15 ||||  .  || --> ||  6  ||||  7  ||||  .  ||
+    |||||||||     |||||||||||||||||||||||||||     |||||||||||||||||||||||||||
+  
+
+    Deciphering the data above lets go row by row:
+
+    Row 1: the verticy "0" is conencted with veritcy "2" and "8", in the case above and for the notation, the first value is the
+    verticy and the second value is the weight for moving between the initial verticy and the one we are at, note that again we 
+    write the verticies in ascending order (depending on their value and not their weight)
+
+    Row 2: The veritcy "2" is again connected with verticy "0" and verticy "3" too
+
+    etc.
+
+    *Note: if two verticies are connected with one another, we need to make that clear in the notation of both nodes not just one
+    on its own (unlike directed graphs in which we rely on the direction of which we are moving at), hence in this case we might
+    find some overlap, however the data can still be used and analyzed to find similar properties of the graph
+
+
+    - Complexity of Operations:
+
+    Is there an edge between 2 nodes?: 
+
+    Adjacency Matrix: O(1) as we only need to look at the column and row in the matrix that is relevant to the verticies in
+    question
+
+    Adjacency List: O(d); d = max. degree of the graph, as in the worst case we have to explore "d" conncetions of the verticy 
+    before we an confirm whether there is a conncection or not (for example if v1 is connected to v2, v3 and v4 and v4 has the
+    largest values, as seen above v4 will be placed at the very end, hence we have to move all the way to the end to confirm
+    that there is an edge connecting v1 and v4)
+
+    Find all verticies adjacenct to vi:
+
+    Adjacency Matrix: O(|V|); |V| =  number of verticies in the graph, this is because we have to explore each and every verticy
+    to recognize whether there is a connection between v1 and said matricy, and there is a maximum number of |V| that can be explored
+
+    Adjacency List: O(d); d = max. degree of the graph, as again reletive to the explanation above there is maximum of "d" conncetions
+    one verticy can have, and we only explore the connections of the verticy when moving through its data structure as represented in 
+    the examples above
+
+    - Space Requirements (Memory/ Storage):
+
+    Adjacency Matrix: O(|V|^2) as we have to store |V|^2 matrix entries to be able to record an nxn matrix (dont forget thats the
+    very essence of an adjacency matrix, it being nxn and |V| is only equal to the number of verticies or in other words "n")
+
+    Adjacency List: O(|V| + |E|): We have to store |V| linked lists or in other words we have |V| verticies that we want to store
+    its connections/edges, in which in total we have |E| entries for those linked lists, hence the space required is a combination
+    of both, the number of verticies, and the total number of entries for those linked lists formed proceeeding the verticies
+
+*Bredth First Search (BFS) and Depth First Search(DFS):
+
+    1. BFS:
+
+    The data structure use to perform this type of search is a queue, this is applicable as we are going through the rows element by element,
+    meaning if we keep a queue that records which position we have explored in order (level by level) and remove from the very start of 
+    the queue and proceed as said one by one (level by level too), then we are performing breadth first search, think of it as going in
+    a very horizontal manner, you are so stubborn that you hate going down before going all the way to the end of the row you are currently
+    at
+
+    2. DFS:
+
+    The data structure we used to perform this search is a stack, this is applicable as we are going through the elements in a column
+    fashion, and dont forget when adding to a stack we add to very top, meaning we can move store the data we have explored into this stack
+    and keep on removing from the very end and explore that node until we either explore the entire graph or find what we are looking for, in 
+    this case your stubbornnes has flipped, you have decided to go so deep in one path before going though a different one, you are so committed 
+    to complete this journey all th way down before you go onto the next path as you believe this way there is a higher chancce you will find
+    what you are looking for (I dont know if thats true, if just adding it as it fits the element of a story)
+
+*Graphs 2:
+
+    - Shortest Paths:
+
+    Given a "weighted" connencted graph G = (V, E) and a pair of verticies vs, vd elements of V, what is the shortest path between those
+    verticies? --> meaning the path with the shortest sum of weights between those two given verticies (vs --> starting node and vd --> destination node)
+
+    - Dijkstra's Algorithim aka Single Source Shortest Path Algorithim: 
+
+    It finds the shortest path that takes the minumum cost to reach from the starting node to the destination node
+
+    Steps of the algorithim:
+
+    Step 1: Create a cost matrix C[][] from adjacent matrix adj[][]. C[i][j] is the cost of going form vertex i to vertex j. If there is no edge
+    between the verticies then C[i][j] is infinity
+    
+    Step 2: Array visited[] is initialized to zero
+
+    Step 3: If the vertx v0 is the source vetrex then visited[v0] is marked as 1 (True)
+
+    Step 4: Create the distance matrix, by sorting the cost veticies from vertex v0 to n-1 from the source to vertex v0. Initially, the distance of source 
+    vertex is taken as 0, i.e. distance[v0] = 0
+
+    Step 5: Create a for loop that does the following:
+
+    1. Starts at i = 1 and ends at i < n incrementing at i++ each time --> for(int i = 1; i < n; i++)
+
+    2. Choose a vertex "w" such that distance[w] is minumum and visited[w] is 0 (False) then mark visited[w] as 1 (True)
+
+    3. Recalculate the shortest distance of remaining verticies from source node
+
+    4. Only, the verticies not marked as 1 in array visited[] should be considered for recalculation of distance, meaning for each
+    vertex v, if(visited[v] == 0) then distance[v] == min{distance[v], distance[w] + cost[w][v]}
+
+    I highly recommend watching this video: https://www.youtube.com/watch?v=XB4MIexjvY0
+
+    -Note: this algorithim may run into issues when there are negative weighted edges 
+
+    Runtime Complexity: O(|V|^2); |V| = number of veriticies *Simplest implemenation*
+    Runtime Complexity: O((|E|)log|V|); |V| = number of verticies and |E| = total entries for the linked list *fancy implemenation*
+
+    Effecient implemenation:
+
+    - Maintain the distances from S (starting node) to the neighbours of S
+    - When we add a vertex to "S" (if need be), we only need to compute the disatnce of the neighbours of that vertex "v" to S
+    - We maintain a priority queue with the with cloests neighbour to S at the top (highest priority)
+
+    Effecient Code:
+
+    Dijkstra(G = (V, E), source){
+        S = {} # S is the set of explored nodes
+        pq = (0, source)
+        while(pq is not empty){
+            if(cur_node in S){
+                continue
+            }
+            cud_dist, cur_node = pq.pop()
+            d(cur_node) = cur_dist
+            add cur_node to S
+            for(each neighbour v of cur_node){
+                pq.push((cud_dist + |(v, cur_dist|), v)
+            }
+        }
+    }
+
+    Breaking down its complexity:
+
+    1. pop from pq and pushing into pq: O(log|V|)
+    2. Upper bound on the total number of nodes pushed: 2|E|
+    3. Total: O(|E|log(|V|)) (the fancy implemenation discussed above)
+
+*Greedy Best First Search:
+
+    - Its goal is to find the shortest path from a source node to destination node
+    - We could run the algorithim we have shown above and stop once we add the destination node to S, however that could be wasteful
+    - We can do estimations of how far a node is from the destination (the implemenation we are going to be using)
+
+    H(node) "Heuristic Function" is an estimation of how far the node is from the destination, this retuens the Euclidian distance from 
+    node to destination
+
+    *Note: it is not garunteed to find the shortest path always, and will work well only if H(node) is a good estimate*
+
+    - A* Algorithim:   
+
+    1. A priority queue where the highest priority is the current estimate for the shortest length from source + an estimate for path
+       length from destination --> H(node)
+
+    2. If H(node) = 0, the A* is just Dijkstra's algorithim
+
+    3. Theorom (just a statemennt): if H(node) never overestimates the distance, the A* will find the shortest path, otherwise it is not
+    garunteed to find the shorest distance
+
+
+
+
+  
+  
+
+
+   
+
+   
+
+
+                                                    
+
+
+
+
+
+
+
+
+
+
+
+
+
