@@ -21,6 +21,10 @@ Have completed Labs and Porjects focused on:
   - Dijkstra's Algorithm
   
   - A* Algorithm 
+
+  - Hashtables
+
+  - Dynamic Programming
   
   - Gradient Descent
   
